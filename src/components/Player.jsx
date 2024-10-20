@@ -3,25 +3,16 @@ import { useRef, useState } from "react";
 export default function Player() {
   const playerName = useRef();
   const [enterPlayerName, setEnterdPlayerName] = useState("");
-  // const [submitted, setSubmmited] = useState(false);
 
-  // function handleChange(event) {
-  //   setSubmmited(false);
-  //   setEnterdPlayerName(event.target.value);
-  // }
   function handleClick() {
-    setEnterdPlayerName(playerName.current.value)
+    setEnterdPlayerName(playerName.current.value);
+    playerName.current.value = ""; //we have imperative code here , and in React we should write imperative code , nut in this case it saves alot of code :D
   }
   return (
     <section id="player">
-      <h2>Welcome {enterPlayerName ?? 'Unknown'}</h2>
+      <h2>Welcome {enterPlayerName ?? "Unknown"}</h2>
       <p>
-        <input
-          ref={playerName}
-          type="text"
-          // onChange={handleChange}
-          // value={enterPlayerName}
-        />
+        <input ref={playerName} type="text" />
         <button onClick={handleClick}>Set Name</button>
       </p>
     </section>
