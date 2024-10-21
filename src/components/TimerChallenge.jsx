@@ -11,8 +11,12 @@ export default function TimerChallenge({ title, targetTime }) {
   if (timeRemaining <= 0) {
     //when timeReamain is smmaller or equal to zero we know that times UP !! but the problem is setInterval refresh every 10ms so we should add it to this if condition , and then setTimeremaing back to initial time after that
     clearInterval(timer.current);
-    setTimeRemaining(targetTime * 1000);
     dialog.current.open(); //When its finished open the dialog  and we do the same in handle stop
+  }
+
+  function handleReset() {
+    setTimeRemaining(targetTime * 1000);
+
   }
 
   function handleStart() {
@@ -26,8 +30,14 @@ export default function TimerChallenge({ title, targetTime }) {
     clearInterval(timer.current);
   }
   return (
+    //with setInterval we now know how much time spend or remaining so we can calculate the score !
     <>
-      <ResultModal ref={dialog} targetTime={targetTime} result="lost" />
+      <ResultModal
+        ref={dialog}
+        targetTime={targetTime}
+        remainingTime={timeRemaining}
+        onReset={handleReset}
+      />
 
       <section className="challenge">
         <h2>{title}</h2>
